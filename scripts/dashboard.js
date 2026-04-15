@@ -1,0 +1,1 @@
+initThemeToggle("themeToggle", "themeLabel");

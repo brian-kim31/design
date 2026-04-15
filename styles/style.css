@@ -1,0 +1,203 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Theme variables aligned with app ── */
+:root {
+  --navy: #0a1628;
+  --navy2: #112240;
+  --blue: #2563eb;
+  --blue2: #3b82f6;
+  --white: #ffffff;
+  --g50: #f8fafc;
+  --g100: #f1f5f9;
+  --g200: #e2e8f0;
+  --g300: #cbd5e1;
+  --g400: #94a3b8;
+  --g600: #475569;
+  --ink: #0f172a;
+  --surface: rgba(255, 255, 255, 0.78);
+  --surface-border: rgba(148, 163, 184, 0.24);
+  --hero-overlay: rgba(10, 22, 40, 0.45);
+}
+
+[data-theme="dark"] {
+  --white: #1e293b;
+  --g50: #0f172a;
+  --g100: #1e293b;
+  --g200: #334155;
+  --g300: #475569;
+  --g400: #64748b;
+  --g600: #cbd5e1;
+  --ink: #f1f5f9;
+  --surface: rgba(15, 23, 42, 0.75);
+  --surface-border: rgba(100, 116, 139, 0.36);
+  --hero-overlay: rgba(2, 6, 23, 0.6);
+}
+
+body {
+  font-family: "Inter", system-ui, sans-serif;
+  background: var(--g50);
+  min-height: 100vh;
+  color: var(--ink);
+}
+
+/* ── Hero ── */
+.hero {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-image: url('../images/Use AI Image Apr 15, 2026, 11_19_09 - Edited.png');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  padding: 110px 24px 48px;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, var(--hero-overlay), rgba(10, 22, 40, 0.2));
+  pointer-events: none;
+}
+
+/* ── Navbar ── */
+.navbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 28px;
+  z-index: 10;
+}
+
+.nav-logo {
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.admin-login {
+  padding: 8px 14px;
+  border-radius: 9px;
+  border: 1.5px solid rgba(255, 255, 255, 0.34);
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-size: 13px;
+  font-family: "Inter", system-ui, sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.admin-login:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.icon-btn {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1.5px solid rgba(255, 255, 255, 0.34);
+  border-radius: 10px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.icon-btn:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+[data-theme="dark"] .icon-btn[aria-label="Toggle theme"] svg {
+  transform: rotate(180deg);
+  transition: transform 0.4s ease;
+}
+
+/* ── Hero Content ── */
+.hero-content {
+  position: relative;
+  z-index: 10;
+  max-width: 760px;
+  width: min(100%, 760px);
+  margin: auto;
+  background: var(--surface);
+  backdrop-filter: blur(6px);
+  border: 1px solid var(--surface-border);
+  border-radius: 20px;
+  padding: 34px 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+}
+
+.hero-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+  color: var(--ink);
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  max-width: 560px;
+}
+
+/* ── CTA Button ── */
+.cta-btn {
+  background: var(--navy);
+  color: #fff;
+  border: 1.5px solid var(--navy);
+  border-radius: 10px;
+  padding: 12px 20px;
+  font-size: 13px;
+  font-family: "Inter", system-ui, sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: background 0.15s, transform 0.15s;
+}
+
+.cta-btn:hover {
+  background: var(--navy2);
+  transform: translateY(-2px);
+}
+
+.cta-btn:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 800px) {
+  .hero {
+    padding-top: 92px;
+  }
+
+  .hero-content {
+    padding: 22px;
+  }
+
+  .navbar {
+    padding: 16px;
+  }
+
+  .admin-login {
+    display: none;
+  }
+}
