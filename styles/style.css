@@ -4,23 +4,17 @@
   padding: 0;
 }
 
-/* ── Theme variables aligned with app ── */
 :root {
   --navy: #0a1628;
   --navy2: #112240;
   --blue: #2563eb;
-  --blue2: #3b82f6;
   --white: #ffffff;
   --g50: #f8fafc;
   --g100: #f1f5f9;
   --g200: #e2e8f0;
-  --g300: #cbd5e1;
   --g400: #94a3b8;
   --g600: #475569;
   --ink: #0f172a;
-  --surface: rgba(255, 255, 255, 0.78);
-  --surface-border: rgba(148, 163, 184, 0.24);
-  --hero-overlay: rgba(10, 22, 40, 0.45);
 }
 
 [data-theme="dark"] {
@@ -28,13 +22,9 @@
   --g50: #0f172a;
   --g100: #1e293b;
   --g200: #334155;
-  --g300: #475569;
   --g400: #64748b;
   --g600: #cbd5e1;
   --ink: #f1f5f9;
-  --surface: rgba(15, 23, 42, 0.75);
-  --surface-border: rgba(100, 116, 139, 0.36);
-  --hero-overlay: rgba(2, 6, 23, 0.6);
 }
 
 body {
@@ -48,21 +38,41 @@ body {
 .hero {
   position: relative;
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
   background-image: url('../images/Use AI Image Apr 15, 2026, 11_19_09 - Edited.png');
   background-size: cover;
   background-position: center;
   display: flex;
   flex-direction: column;
-  padding: 110px 24px 48px;
+  align-items: center;
+  justify-content: center;
 }
 
+/* Blur layer */
 .hero::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, var(--hero-overlay), rgba(10, 22, 40, 0.2));
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
   pointer-events: none;
+  z-index: 0;
+}
+
+/* Dark overlay on top of blur */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    160deg,
+    rgba(4, 10, 22, 0.72) 0%,
+    rgba(6, 14, 30, 0.58) 60%,
+    rgba(10, 20, 40, 0.5) 100%
+  );
+  pointer-events: none;
+  z-index: 1;
 }
 
 /* ── Navbar ── */
@@ -74,15 +84,16 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 28px;
+  padding: 22px 32px;
   z-index: 10;
 }
 
 .nav-logo {
-  font-size: 16px;
-  font-weight: 700;
-  color: #fff;
-  letter-spacing: -0.01em;
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 0.02em;
+  font-family: "Inter", system-ui, sans-serif;
 }
 
 .nav-right {
@@ -92,11 +103,11 @@ body {
 }
 
 .admin-login {
-  padding: 8px 14px;
+  padding: 8px 16px;
   border-radius: 9px;
-  border: 1.5px solid rgba(255, 255, 255, 0.34);
-  background: rgba(255, 255, 255, 0.12);
-  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.85);
   font-size: 13px;
   font-family: "Inter", system-ui, sans-serif;
   font-weight: 500;
@@ -105,78 +116,81 @@ body {
 }
 
 .admin-login:hover {
-  background: rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .icon-btn {
-  background: rgba(255, 255, 255, 0.12);
-  border: 1.5px solid rgba(255, 255, 255, 0.34);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.28);
   border-radius: 10px;
   width: 36px;
   height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
+  color: rgba(255, 255, 255, 0.85);
   cursor: pointer;
   transition: background 0.15s;
 }
 
 .icon-btn:hover {
-  background: rgba(255, 255, 255, 0.22);
-}
-
-[data-theme="dark"] .icon-btn[aria-label="Toggle theme"] svg {
-  transform: rotate(180deg);
-  transition: transform 0.4s ease;
+  background: rgba(255, 255, 255, 0.2);
 }
 
 /* ── Hero Content ── */
 .hero-content {
   position: relative;
   z-index: 10;
-  max-width: 760px;
-  width: min(100%, 760px);
-  margin: auto;
-  background: var(--surface);
-  backdrop-filter: blur(6px);
-  border: 1px solid var(--surface-border);
-  border-radius: 20px;
-  padding: 34px 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 18px;
   text-align: center;
+  padding: 0 24px;
 }
 
 .hero-title {
-  font-size: clamp(2rem, 4vw, 3rem);
-  font-weight: 800;
-  color: var(--ink);
-  line-height: 1.2;
+  font-family: 'Montserrat', system-ui, sans-serif;
+  font-size: clamp(4rem, 11vw, 9.5rem);
+  font-weight: 900;
+  color: #f0c060;
+  line-height: 0.95;
   letter-spacing: -0.03em;
-  max-width: 560px;
+  text-shadow: 0 4px 48px rgba(0, 0, 0, 0.4);
+}
+
+.hero-sub {
+  font-family: 'Montserrat', system-ui, sans-serif;
+  font-size: clamp(0.7rem, 1.4vw, 0.9rem);
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.55);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-top: 16px;
 }
 
 /* ── CTA Button ── */
 .cta-btn {
-  background: var(--navy);
+  margin-top: 12px;
+  background: rgba(255, 255, 255, 0.12);
   color: #fff;
-  border: 1.5px solid var(--navy);
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
   border-radius: 10px;
-  padding: 12px 20px;
+  padding: 13px 36px;
   font-size: 13px;
   font-family: "Inter", system-ui, sans-serif;
   font-weight: 500;
+  letter-spacing: 0.04em;
   cursor: pointer;
   text-decoration: none;
   display: inline-block;
-  transition: background 0.15s, transform 0.15s;
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
+  backdrop-filter: blur(4px);
 }
 
 .cta-btn:hover {
-  background: var(--navy2);
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.65);
   transform: translateY(-2px);
 }
 
@@ -184,17 +198,9 @@ body {
   transform: translateY(0);
 }
 
-@media (max-width: 800px) {
-  .hero {
-    padding-top: 92px;
-  }
-
-  .hero-content {
-    padding: 22px;
-  }
-
+@media (max-width: 600px) {
   .navbar {
-    padding: 16px;
+    padding: 16px 20px;
   }
 
   .admin-login {
